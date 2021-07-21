@@ -45,13 +45,14 @@ function App() {
             <NavLink exact activeClassName="active" to="/">
               Home
             </NavLink>
+            
             <NavLink activeClassName="active" to="/login">
               Login
             </NavLink>
 
-            <NavLink activeClassName="active" to="/dashboard">
+            {/* <NavLink activeClassName="active" to="/dashboard">
               Dashboard
-            </NavLink>
+            </NavLink> */}
             <NavLink activeClassName="active" to="/todos">
               Todos
             </NavLink>
