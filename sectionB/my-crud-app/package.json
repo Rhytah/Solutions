@@ -2,7 +2,7 @@
   "name": "my-crud-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "httpp://localhost:4000/",
+  "proxy": "https://todos-api-me.herokuapp.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

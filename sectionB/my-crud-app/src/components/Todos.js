@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getUser, removeUserSession } from '../Utils/Common';
 import axios from 'axios';
 
 function Todos(props) {
-  const user = getUser();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [todos, setTodos] = useState([])
   const title = useFormInput('');
   const description = useFormInput('');
+  const completed = useFormInput('False')
 
   useEffect(()=>{
   const handleTodosFetch = () => {
@@ -50,6 +49,37 @@ function Todos(props) {
       else setError("Something went wrong. Please try again later.");
     });
   }
+
+  const handleDelete = (id)=>{
+    axios.delete(`/todos/${id}/delete`, { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5ueSIsImlhdCI6MTYyNjgyMjMxOSwiZXhwIjoxNjI2OTA4NzE5fQ.hx5QlW5Ne5g1u06DQeJOlW7UFkYBKa-JbKR31PjSKtk'
+    }}).then(response => {
+     
+      console.log(response)
+      props.history.push('/todos');
+    }).catch(error => {
+      setLoading(false);
+      console.log("error :", error)
+      if (error) setError(error);
+      else setError("Something went wrong. Please try again later.");
+    });
+  }
+  const handleUpdate = (id)=>{
+    axios.delete(`/todos/${id}/update`,{ title: title.value, description: description.value, isCompleted: completed.value }, { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG5ueSIsImlhdCI6MTYyNjgyMjMxOSwiZXhwIjoxNjI2OTA4NzE5fQ.hx5QlW5Ne5g1u06DQeJOlW7UFkYBKa-JbKR31PjSKtk'
+    }}).then(response => {
+     
+      console.log(response)
+      props.history.push('/todos');
+    }).catch(error => {
+      setLoading(false);
+      console.log("error :", error)
+      if (error) setError(error);
+      else setError("Something went wrong. Please try again later.");
+    });
+}
   return (
       <>
     <div>
@@ -69,7 +99,7 @@ function Todos(props) {
                    {todo.title ?(
         <div className="todo-item">
         <p>
-          <input type="checkbox"/>
+          <input type="checkbox" name="completed" />
           {" "}{todo.title}
           <button className="del">X</button>
         </p>

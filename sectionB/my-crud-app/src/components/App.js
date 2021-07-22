@@ -8,7 +8,7 @@ import Home from "./Home";
 
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicRoute from "../Utils/PublicRoute";
-import { getToken, removeUserSession, setUserSession } from "../Utils/Common";
+import { getToken } from "../Utils/Common";
 import Todos from "./Todos";
 import './components.css';
 
@@ -20,22 +20,7 @@ function App() {
     if (!token) {
       return;
     }
-
-    // axios
-    //   .get(`/verifyToken?token=${token}`)
-    //   .then((response) => {
-    //     setUserSession(response.data.token, response.data.user);
-    //     setAuthLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     removeUserSession();
-    //     setAuthLoading(false);
-    //   });
   }, []);
-
-//   if (getToken()) {
-//     return <div className="content">Checking Authentication...</div>;
-//   }
 
   return (
     <div className="App">
